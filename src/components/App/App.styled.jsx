@@ -1,10 +1,10 @@
 import styled from '@emotion/styled';
 
 export const Container = styled.div`
-    width: 500px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color:#008080 ;
-    border-radius: 6px;
-    
+  background-color:#008080;
+  margin: 0 auto;
+  padding: 20px;
+  width: 450px;
+  border-radius: 8px;
+
 `;
