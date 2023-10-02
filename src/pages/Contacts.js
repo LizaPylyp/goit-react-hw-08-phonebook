@@ -1,9 +1,9 @@
 import { useSelector } from "react-redux";
 import { getContacts } from 'redux/selectors';
 import { ContactForm } from '../components/ContactForm/ContactForm';
-import { ContactList } from '../components/ContactList/ContactList';
+import { ContactList } from '../components/ContactListt/ContactList';
 import { Filter } from '../components/Filter/Filter';
-import { Section } from "components/Section/Section";
+import { Section } from "components/Sectio/Section";
 
 const Contacts = () => {
     const { isLoading, error } = useSelector(getContacts);
