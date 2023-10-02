@@ -1,8 +1,11 @@
-import { Form, FormLabel, FormInput, FormButton } from './ContactForm.styled';
 import { useDispatch, useSelector } from 'react-redux';
+import { nanoid } from '@reduxjs/toolkit';
+
+import { Form, FormLabel, FormInput, FormButton } from './ContactForm.styled';
 import { addContact } from 'redux/actions';
 import { getContacts } from 'redux/selectors';
-import Notiflix from 'notiflix';
+import { getNotification } from 'components/helped/getNotificatin';
+
 
 export function ContactForm() {
   const { contactsItem } = useSelector(getContacts);
@@ -13,14 +16,15 @@ export function ContactForm() {
     const form = evt.target;
     const { name, number } = form.elements;
 
-    if (contactsItem.some(contact => contact.name === name.value)) {
-      Notiflix.Report.warning(
-        'Warning',
-        `${name.value} is already in contacts.`
-      );
+    const newContact = {
+      id: nanoid(),
+      name: name.value,
+      number: number.value,
+    };
+    if (contactsItem.some(contact => contact.name.toLowerCase() === name.value.toLowerCase())) {
+      getNotification(`${name.value} is already in contacts.`);
     } else {
-      dispatch(addContact({ name: name.value, phone: number.value }));
-      //
+      dispatch(addContact(newContact));
     }
     form.reset();
   };
@@ -52,16 +56,11 @@ export function ContactForm() {
   );
 }
 
-Notiflix.Report.init({
-  svgSize: '50px',
-  messageFontSize: '20px',
-  warning: {
-    svgColor: '#44728f',
 
-    buttonBackground: '#44728f',
-    backOverlayColor: 'rgba(0,0, 0,0.2)',
-  },
-});
+
+
+
+
 
 
 
